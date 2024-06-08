@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+}
+
+.bg-img1{
+    background-image: url("https://images.unsplash.com/photo-1516906158245-7fafb29df119?q=80&w=1448&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    background-image: url("https://images.unsplash.com/photo-1637665759389-41818b867562?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    /* background-position: bottom; */;
+
+}
+
+.navbar {
+    height: 5rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 10px;
+    background-color: whitesmoke;
+}
+
+.menu {
+    display: flex;
+    font-size: larger;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: larger;
+    font-family: "Dancing Script", cursive;
+}
+
+.Login {
+    padding: 5px 13px;
+    margin-right: 10px;
+    background-color: #8ecbdb;
+    font-size: larger;
+}
+
+.Login {
+    text-decoration: none;
+    color: black;
+}
+
+.login img {
+    display: none;
+}
+
+.main {
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+
+}
+
+.container {
+    height: 400px;
+    width: 1000px;
+    background-color: whitesmoke;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 10px solid white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.inputs {
+    display: flex;
+    height: fit-content;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.inputs span {
+    font-weight: 600;
+    font-size: large;
+}
+
+.inputs select {
+    width: 200px;
+    padding: 5px 7px;
+    border-radius: 5px;
+    border-bottom: 1px solid black;
+}
+
+.search-btn {
+    margin: auto;
+    margin-top: 50px;
+}
+
+.search {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.search-btn {
+    width: 100px;
+  align-items: center;
+  background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+  background-color: #09c7fb;
+  background-image: linear-gradient(315deg, #09c7fb 0%, #93fb9d 74%);
+    border: 0;
+  border-radius: 8px;
+  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  color: black;
+  font-weight: 500;
+  display: flex;
+  font-family: Phantomsans, sans-serif;
+  font-size: 20px;
+  justify-content: center;
+  line-height: 1em;
+  max-width: 100%;
+  min-width: 140px;
+  padding: 19px 24px;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.search-btn:active,
+.search-btn:hover {
+  outline: 0;
+}
+
+h5 {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 480px) {
+    body {
+        background-position: center;
+    }
+    .menu span {
+        display: none;
+    }
+    .login img {
+        display: flex;
+    }
+    .Login {
+        display: none;
+    }
+    .container {
+        width: 90%;
+        height: max-content;
+        padding: 50px 20px;
+    }
+    .inputs {
+        display: grid;
+        grid-template-columns: auto;
+        gap: 20px;
+    }
+    .inputs select {
+        float: right;
+    }
+    option {
+        width: min-content;
+        font-size: smaller;
+    }
+}
+
+/* Media Query for low resolution  Tablets, Ipads */
+@media (min-width: 481px) and (max-width: 767px) {
+    .container {
+        width: 90%;
+        height: max-content;
+        padding: 20px 20px;
+    }
+    .inputs {
+        display: grid;
+        grid-template-columns: auto;
+        gap: 20px;
+    }
+    .inputs select {
+        float: right;
+        margin-left: 10px;
+    }
+}
+
+/* Media Query for Tablets Ipads portrait mode */
+@media (min-width: 768px) and (max-width: 1024px){
+    .container {
+        width: 90%;
+    }
+}
+  

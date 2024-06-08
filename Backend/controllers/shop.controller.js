@@ -1,0 +1,150 @@
+const shop = require("../models/shop.model");
+const Shop = require("../models/shop.model");
+const { z } = require("zod");
+// const simplecrypt = require("simplecrypt");
+const crypto = require("crypto")
+
+// const getProducts = async (req, res) => {
+//   try {
+//     const products = await Product.find();
+//     res.status(200).json(products);
+//   } catch (err) {
+//     res.status(500).send(err.message);
+//   }
+// };
+
+// const getProduct = async (req, res) => {
+//   try {
+//     const _id = req.params.id;
+//     const product = Product.findById(id);
+
+//     if (!product) {
+//       res.status(404).json({ msg: "Product doesnt exist" });
+//     } else {
+//       res.status(200).json(product);
+//     }
+//   } catch (error) {
+//     res.status(500).json({ msg: error.message });
+//   }
+// };
+
+const sSchema = z.object({
+  name: z.string(),
+  email: z.string().email().endsWith(".com"),
+  number: z.number(),
+  city: z.string(),
+  age: z.number(),
+  gender: z.string(),
+});
+
+const loginShop = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    
+    let shopUser = await Shop.findOne({ email });
+    console.log(shopUser)
+    if (shopUser != null) {
+      const hashPwd = crypto.createHash('sha1').update(password).digest('hex');
+
+      // bcrypt.compare(password, shopUser.password, function(err, result) {
+        // result == true
+
+    // });
+
+    if(hashPwd === shopUser.password){
+
+    // console.log(shopUser.password, encrypted);
+      
+      shopUser = shopUser.toObject().email;
+      return res.status(200).json({ shopUser });
+    }
+    if (shopUser === null) {
+      return res
+        .status(400)
+        .json({ err: "User with email does not exist .Please signup" });
+    }
+  }
+
+  } catch (error) {
+    return res.status(500).json({ err: error.message });
+  }
+};
+
+const signupShop = async (req, res) => {
+  const shopObj = req.body;
+  // const {success} = userSchema.safeParse(req.body);
+  console.log(req.body);
+  // console.log(success);
+  // if (!success) {
+  //   return res.status(400).json({ err: "Invalid input" });
+  // }
+  try {
+    const shopuserExists = await Shop.exists({ email: shopObj.email });
+    if (shopuserExists) {
+      return res.status(409).json({ err: "User with email already exists" });
+    }
+
+    const hashPwd = crypto.createHash('sha1').update(shopObj.password).digest('hex');
+
+
+    
+      shopObj.password = hashPwd;
+      Shop.create(shopObj)
+        .then((shopUser) => {
+          console.log(shopUser);
+          return res.status(201).json( shopUser );
+
+          // shopUser = shopUser.toObject().email;
+        })
+        // .then((shopUser) => {
+        // });
+      console.log(shopObj.password);
+      // shopObj.password = hash;
+  } catch (error) {
+    console.log("Error in signup");
+    return res.status(500).json({ err: error.message });
+  }
+};
+
+// const updateProduct = async (req, res) => {
+//   try {
+//     const _id = req.params.id;
+//     const product = await Product.findByIdAndUpdate(_id, req.body);
+
+//     if (!product) {
+//       res.status(404).json({ message: "Product not found" });
+//     }
+
+//     const updatedProduct = await Product.findById(_id);
+//     res.status(200).json(updatedProduct);
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };
+
+// const deleteProduct = async (req, res) => {
+//   try {
+//     const _id = req.params.id;
+//     const product = await Product.findByIdAndDelete(_id);
+//     if (!product) {
+//       return res.status(404).json({ message: "Product doesnt exist" });
+//     } else {
+//       res.status(200).json(product);
+//     }
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };
+
+// module.exports = {
+//   getProducts,
+//   getProduct,
+//   createProduct,
+//   updateProduct,
+//   deleteProduct,
+// };
+
+module.exports = {
+  loginShop,
+  signupShop,
+};
